@@ -53,6 +53,19 @@ Just use the wrapper like this
 When performing new transforms, pyfftw will acquire new wisdom - to use this
 wisdom in the future, call ``tfft.save_wisdom()``.
 
+Optionally making your project depend on transparent_pyfftw_wrapper
+-------------------------------------------------------------------
+
+In case you want to use transparent_pyfftw_wrapper in your project without
+having it as a hard dependency for users, you may use the fact that pyfftw and
+thus this wrapper as well use NumPy interfaces::
+
+    try:
+        from transparent_pyfftw_wrapper import fft, ifft
+    except ImportError:
+        from numpy.fft import fft, ifft
+
+
 License and Copyright
 ---------------------
 
