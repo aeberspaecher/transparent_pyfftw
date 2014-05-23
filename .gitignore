@@ -1,0 +1,5 @@
+.waf*
+.lock-waf*
+options.py
+build/*
+.trans
