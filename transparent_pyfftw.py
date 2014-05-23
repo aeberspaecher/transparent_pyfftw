@@ -32,11 +32,11 @@ def read_wisdom():
             print("Wisdom file is empty. Try calling save_wisdom().")
             wisdom = None
         else:
-            # FIXME: glue together suitable strings before importing
             wisdom_tuple = []
             for line in wisdom:
-                # if a line starts with a space, it belongs to last list member
-                # ("current" element). otherwise, it starts a new member
+                # if a line starts with a space or a right paren, it belongs to
+                # last list member ("current" element). otherwise, it starts a
+                # new member.
                 if(line.startswith(" ") or line.startswith(")")):
                     wisdom_tuple[-1] += line  # append to string
                 else:
@@ -246,3 +246,6 @@ def ihfftn(*args, **kwargs):
     kwargs["threads"] = pyfftw_threads
 
     return pihfftn(*args, **kwargs)
+
+
+# TODO: tests!
