@@ -10,15 +10,15 @@ and pyfftw.
 
 anfft used to be the simplest posssible wrapper possible. It automatically took
 care of FFTW's 'wisdom' (recipes on how to compute specific transforms the
-fastest) and used threads if possible. From a user point of view, it hid all
+fastest) and used threads if possible. From a user's point of view, it hid all
 FFTW details a simple minded user does not want to take care of. As the only
 downside it didn't expose the full range of possible routines, e.g. a dedicated
 fft2() was missing.
 
 pyfftw is the more complete wrapper. These days, it even offers NumPy or SciPy
 style interfaces to FFTW. However, it also exposes FFTW details such as wisdom,
-threads and buffers. This wrapper of the a wrapper tries to hide these details
-much in the spirit of anfft.
+threads and buffers. This wrapper of a wrapper tries to hide these details much
+in the spirit of anfft.
 
 Configuring and installing
 --------------------------
@@ -51,7 +51,8 @@ Just use the wrapper like this
     tfft.fft2(your_data)
 
 When performing new transforms, pyfftw will acquire new wisdom - to use this
-wisdom in the future, call ``tfft.save_wisdom()``.
+wisdom in the future, call ``tfft.save_wisdom()``. Wisdom is automatically
+loaded when the wrapper is imported.
 
 Optionally making your project depend on transparent_pyfftw_wrapper
 -------------------------------------------------------------------
