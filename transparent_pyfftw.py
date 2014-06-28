@@ -15,7 +15,9 @@ from pyfftw.interfaces.numpy_fft import fft as pfft, ifft as pifft, fft2 as pfft
     rfft2 as prfft2, irfft2 as pirfft2, rfftn as prfftn, irfftn as pirfftn, \
     fftshift, ifftshift, fftfreq
 
-from .options import pyfftw_threads, wisdom_file
+from .options import wisdom_file
+
+pyfftw_threads = 1  # is overwritten after import in __init__.py
 
 
 def read_wisdom():

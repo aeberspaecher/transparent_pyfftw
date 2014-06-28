@@ -23,12 +23,20 @@ in the spirit of anfft.
 Configuring and installing
 --------------------------
 
-The only time the user needs to think about wisdom and threads is when
-preparing to install. Configure first::
+The only time the user needs to think about wisdom files is when preparing to
+install. Configure first::
 
-    ./waf configure --num-threads=2 --wisdom-file="/home/your_user/.pyfftw_wisdom"
+    ./waf configure --wisdom-file="/home/your_user/.pyfftw_wisdom"
 
-Set ``--num-threads=1`` in case your pyfftw does not support threads.
+The number of threads used is determined by an environment variable.
+Set (using bash)
+
+::
+
+    export -x TFFTW_NUM_THREADS=2
+
+to use two threads. If your FFTW does not support threads, do not set this
+variable or set it to 1.
 
 Last, install with
 

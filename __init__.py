@@ -14,5 +14,16 @@ To save acquired wisdom, call save_wisdom(). Wisdom is automatically loaded on
 import.
 """
 
+import os
+
+import transparent_pyfftw
+
+# set number of threads from environment variable:
+try:
+    num_threads = int(os.environ["TFFTW_NUM_THREADS"])
+except KeyError:
+    num_threads = 1
+
+transparent_pyfftw.pyfftw_threads = num_threads
 
 from transparent_pyfftw import *
