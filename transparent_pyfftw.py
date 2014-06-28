@@ -8,6 +8,8 @@ with the dying anfft project. Hide "boring" stuff such as caching, SIMD
 alignment and threads form the user.
 """
 
+import numpy as np
+
 import pyfftw
 from pyfftw.interfaces.numpy_fft import fft as pfft, ifft as pifft, fft2 as pfft2, \
     ifft2 as pifft2, fftn as pfftn, ifftn as pifftn, \
@@ -74,7 +76,7 @@ def save_wisdom():
         raise Exception("Configured not to use any FFTW wisdom!")
 
 
-def get_empty_fftw_array(shape, dtype="float64", *kwargs):
+def get_empty_fftw_array(shape, dtype=np.float64, **kwargs):
     """Create memory aligned empty array.
     """
 
@@ -251,3 +253,4 @@ def ihfftn(*args, **kwargs):
 
 
 # TODO: tests!
+# TODO: also wrap the scipy interface

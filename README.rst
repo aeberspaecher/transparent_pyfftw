@@ -62,6 +62,13 @@ When performing new transforms, pyfftw will acquire new wisdom - to use this
 wisdom in the future, call ``tfft.save_wisdom()``. Wisdom is automatically
 loaded when the wrapper is imported.
 
+To create a byte-aligned array, call
+
+::
+
+    foo = tfft.get_empty_fftw_array([256, 512])  # create a 256 x 512 array
+
+
 Optionally making your project depend on transparent_pyfftw_wrapper
 -------------------------------------------------------------------
 
