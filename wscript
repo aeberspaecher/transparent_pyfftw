@@ -18,11 +18,11 @@ def configure(conf):
 
     wisdom_file = conf.options.wisdom_file
     option_file_content = "wisdom_file = '%s'"%(wisdom_file)
-    opt_file = file("options.py", mode="w")
+    opt_file = file("transparent_pyfftw/options.py", mode="w")
     opt_file.write(option_file_content)
     opt_file.close()
 
 
 def build(bld):
-    bld(features="py", source=bld.path.ant_glob("*.py"),
+    bld(features="py", source=bld.path.ant_glob("transparent_pyfftw/*.py"),
         install_path="${PYTHONDIR}/transparent_pyfftw")
