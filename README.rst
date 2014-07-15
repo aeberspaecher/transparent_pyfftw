@@ -5,8 +5,9 @@ Intro
 -----
 
 The Fastet Fourier Transform in the West is an incredible library. There are at
-least two different Python wrappers around FFTW: `anfft <http://www>`_ (which
-is declared dead) and the awesome `pyfftw <http://www>`_.
+least two different Python wrappers around FFTW: `anfft
+<https://code.google.com/p/anfft/>`_ (which is declared dead) and the awesome
+`pyfftw <http://hgomersall.github.io/pyFFTW/>`_.
 
 anfft used to be the simplest posssible wrapper possible. It automatically took
 care of FFTW's 'wisdom' (recipes on how to compute specific transforms the
@@ -16,9 +17,11 @@ downside it didn't expose the full range of possible routines, e.g. a dedicated
 fft2() was missing.
 
 pyfftw is the more complete wrapper. These days, it even offers `NumPy or SciPy
-style interfaces <http://>`_to FFTW. However, it also exposes FFTW details such
-as wisdom, threads and buffers. This wrapper of a wrapper tries to hide these
-details much in the spirit of anfft.
+style interfaces
+<http://hgomersall.github.io/pyFFTW/pyfftw/interfaces/interfaces.html>`_to
+FFTW. However, it also exposes FFTW details such as wisdom, threads and
+buffers. This wrapper of a wrapper tries to hide these details much in the
+spirit of anfft.
 
 Configuring and installing
 --------------------------
