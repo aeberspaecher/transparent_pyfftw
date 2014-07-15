@@ -14,7 +14,7 @@ names = ["fft", "ifft", "fft2", "ifft2", "fftn", "ifftn", "rfft", "irfft",
          "rfft2", "irfft2", "rfftn", "irfftn", "hfft", "ihfft", "hfft2",
          "ihfft2", "hfftn", "ihfftn"]
 
-def generate_wrapper(name, module, original_docstring):
+def generate_wrapper(name, module, original_docstring, num_threads):
     """Generate a wrapper function.
 
     Parameters
@@ -25,6 +25,8 @@ def generate_wrapper(name, module, original_docstring):
         Name of the module the wrapped function is part of.
     original_docstring : string
         Docstring of the wrapped function.
+    num_threads : int
+        Number of threads to use.
 
     Returns
     -------
@@ -34,8 +36,19 @@ def generate_wrapper(name, module, original_docstring):
 
     # create a string that informs the user about the 'threads' parameter added
     # to the call if appropriate:
-    add_keyword_atom = "additional arguments docs"
-    additional_arg_string = "Arguments automatically added on call are 'threads=pyfftw_threads'.\n" if add_keyword_atom in original_docstring else "This wrapper does nothing but to call the pyfftw function.\n"
+
+    # check two versions of the string that triggers addition of the threads
+    # keyword - this is necessary due to pyfftw documentation inconsistencies
+    add_keyword_atoms = ('additional arguments docs', 'additional argument docs')
+    if(any( [ keyword in original_docstring for keyword in add_keyword_atoms ] )):
+        additional_arg_string = \
+            'Arguments automatically added on call are "threads=%s".\n'%num_threads
+        additional_arg_code = 'kwargs["threads"] = %s'%num_threads
+    else:
+        additional_arg_string = \
+            'This wrapper does nothing besides calling the pyfftw function.\n'
+        additional_arg_code = ''
+
     wrapper_string = '''
 def %(name)s(*args, **kwargs):
     """A thin wrapper around pyfftw.interfaces.%(module)s.%(name)s.
@@ -44,16 +57,11 @@ def %(name)s(*args, **kwargs):
     Docstring of original pyfftw function:
     --------------------------------------
     %(original_docstring)s
-    """
 
-    kwargs["threads"] = pyfftw_threads
+    """
+    %(additional_arg_code)s
 
     return _%(name)s(*args, **kwargs)
 '''%locals()
 
     return wrapper_string
-
-
-# TODO: method to decide which wrappers (in Scipy) can take a threads argument
-# (probably relying on pyfftw's documentation works: if <interfaces_additional_args>
-# is in the doctsring, we can add the threads keyword)
