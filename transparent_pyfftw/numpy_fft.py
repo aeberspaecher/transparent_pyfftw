@@ -7,7 +7,7 @@
 import pyfftw.interfaces.numpy_fft as nfft
 
 from .generate_wrappers import generate_wrapper
-from .transparent_pyfftw import get_num_threads
+from .transparent_pyfftw import *
 
 
 # the wrappers are generated on import:
