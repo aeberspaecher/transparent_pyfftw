@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
+"""Common functions for transparent_pyfftw.
+"""
+
 import os
 
 import numpy as np
@@ -85,13 +88,35 @@ def save_wisdom():
 
 def get_empty_fftw_array(shape, dtype=np.float64, **kwargs):
     """Create memory aligned empty array.
+
+    Parameters
+    ----------
+    shape : tuple-like
+    dtype : object
+
+    Returns
+    -------
+    aligned : array
+        Empty, byte-aligned array.
+
+    Notes
+    -----
+    Keyword arguments are passed on to pyfftw.n_byte_align_empty().
     """
 
     return pyfftw.n_byte_align_empty(shape, pyfftw_simd_alignment, dtype, **kwargs)
 
 
 def align_array(arr):
-    """Return memory aligned copy of arr. This may be speed pyfftw calls up.
+    """Return memory aligned copy of arr. This may be speed up pyfftw calls.
+
+    Parameters
+    ----------
+    arr : array
+
+    Returns
+    -------
+    arr_aligned : array
     """
 
     return pyfftw.n_byte_align(arr, pyfftw_simd_alignment)
